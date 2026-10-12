@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Statistik Deskriptif</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Dashboard Statistik Deskriptif</h1>
+
+        <p class="subtitle">
+            Analisis Data Latihan 1
+        </p>
+
+
+        <!-- DATA MAHASISWA -->
+
+        <div class="card">
+
+            <h2>Data Mahasiswa</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            {% for nama_kolom in kolom %}
+                            <th>{{ nama_kolom }}</th>
+                            {% endfor %}
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for baris in data %}
+
+                        <tr>
+
+                            {% for nama_kolom in kolom %}
+
+                            <td>
+                                {{ baris[nama_kolom] }}
+                            </td>
+
+                            {% endfor %}
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- HASIL STATISTIK -->
+
+        <div class="card">
+
+            <h2>Hasil Statistik Deskriptif</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Variabel</th>
+                            <th>Rata-rata</th>
+                            <th>Jumlah Kuadrat</th>
+                            <th>Standar Deviasi</th>
+                            <th>Minimum</th>
+                            <th>Maksimum</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for item in statistik %}
+
+                        <tr>
+
+                            <td>{{ item.variabel }}</td>
+
+                            <td>
+                                {{ "%.2f"|format(item.rata_rata) }}
+                            </td>
+
+                            <td>
+                                {{ "%.2f"|format(item.jumlah_kuadrat) }}
+                            </td>
+
+                            <td>
+                                {{ "%.2f"|format(item.standar_deviasi) }}
+                            </td>
+
+                            <td>
+                                {{ "%.2f"|format(item.minimum) }}
+                            </td>
+
+                            <td>
+                                {{ "%.2f"|format(item.maksimum) }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- KESIMPULAN -->
+
+        <div class="card">
+
+            <h2>Kesimpulan</h2>
+
+            <p>
+                Standar deviasi menunjukkan seberapa besar penyebaran
+                data terhadap nilai rata-ratanya.
+            </p>
+
+            <p>
+                Semakin kecil standar deviasi, semakin dekat data
+                dengan nilai rata-ratanya. Semakin besar standar deviasi,
+                semakin bervariasi data tersebut.
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
